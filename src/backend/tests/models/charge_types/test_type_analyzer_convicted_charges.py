@@ -18,17 +18,6 @@ class TestSingleChargeConvictions(unittest.TestCase):
         charge = ChargeFactory.save(self.single_charge)
         return charge
 
-    def test_felony_class_a_charge(self):
-        self.single_charge["name"] = "Assault in the first degree"
-        self.single_charge["statute"] = "163.185"
-        self.single_charge["level"] = "Felony Class A"
-        felony_class_a_convicted = self.create_recent_charge()
-        self.charges.append(felony_class_a_convicted)
-
-        assert felony_class_a_convicted.type_name == "Felony Class A"
-        assert felony_class_a_convicted.expungement_result.type_eligibility.status is EligibilityStatus.INELIGIBLE
-        assert felony_class_a_convicted.expungement_result.type_eligibility.reason == "Ineligible under 137.225(5)"
-
     def test_misdemeanor_sex_crime(self):
         self.single_charge["name"] = "Sexual Abuse in the Third Degree"
         self.single_charge["statute"] = "163.415"
