@@ -13,6 +13,10 @@ class TestSingleChargeConvictions(unittest.TestCase):
         last_week = datetime.today() - timedelta(days=7)
         self.single_charge = ChargeFactory.build(disposition=Disposition(ruling="Convicted", date=last_week))
         self.charges = []
+    
+    def create_recent_charge(self):
+        charge = ChargeFactory.save(self.single_charge)
+        return charge
 
     def test_misdemeanor_sex_crime(self):
         self.single_charge["name"] = "Sexual Abuse in the Third Degree"
