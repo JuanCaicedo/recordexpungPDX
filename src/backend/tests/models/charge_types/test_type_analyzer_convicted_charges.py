@@ -147,28 +147,6 @@ class TestSingleChargeConvictions(unittest.TestCase):
 
     # Eligible misdemeanor and class C felony tests
 
-    def test_misdemeanor_164043(self):
-        self.single_charge["name"] = "Theft in the third degree"
-        self.single_charge["statute"] = "164.043"
-        self.single_charge["level"] = "Misdemeanor Class C"
-        charge = self.create_recent_charge()
-        self.charges.append(charge)
-
-        assert charge.type_name == "Misdemeanor"
-        assert charge.expungement_result.type_eligibility.status is EligibilityStatus.ELIGIBLE
-        assert charge.expungement_result.type_eligibility.reason == "Eligible under 137.225(5)(b)"
-
-    def test_misdemeanor_164055(self):
-        self.single_charge["name"] = "Theft in the first degree"
-        self.single_charge["statute"] = "164.055"
-        self.single_charge["level"] = "Felony Class C"
-        charge = self.create_recent_charge()
-        self.charges.append(charge)
-
-        assert charge.type_name == "Felony Class C"
-        assert charge.expungement_result.type_eligibility.status is EligibilityStatus.ELIGIBLE
-        assert charge.expungement_result.type_eligibility.reason == "Eligible under 137.225(5)(b)"
-
     def test_misdemeanor_164125(self):
         self.single_charge["name"] = "Theft of services"
         self.single_charge["statute"] = "164.125"
@@ -203,7 +181,6 @@ class TestSingleChargeConvictions(unittest.TestCase):
         assert charge.expungement_result.type_eligibility.reason == "Unrecognized Charge : Further Analysis Needed"
 
     # Test non-traffic violation
-
     def test_non_traffic_violation(self):
         self.single_charge["name"] = "Viol Treatment"
         self.single_charge["statute"] = "1615662"

@@ -160,14 +160,3 @@ class TestSingleChargeConvictions(unittest.TestCase):
         assert charge.type_name == "Felony Class C"
         assert charge.expungement_result.type_eligibility.status is EligibilityStatus.ELIGIBLE
         assert charge.expungement_result.type_eligibility.reason == "Eligible under 137.225(5)(b)"
-
-    def test_rape_class_c_felony(self):
-        self.single_charge["name"] = "Rape in the Third Degree"
-        self.single_charge["statute"] = "163.355"
-        self.single_charge["level"] = "Felony Class C"
-        sex_crime_charge = self.create_recent_charge()
-        self.charges.append(sex_crime_charge)
-
-        assert sex_crime_charge.type_name == "Person Crime"
-        assert sex_crime_charge.expungement_result.type_eligibility.status is EligibilityStatus.INELIGIBLE
-        assert sex_crime_charge.expungement_result.type_eligibility.reason == "Ineligible under 137.225(5)"
